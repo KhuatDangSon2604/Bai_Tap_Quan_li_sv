@@ -2,40 +2,46 @@
 package QLSV;
 
 
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 public class score {
-    private Integer student_id;
-    private Integer course_id;
-    private Integer major_id;
-    private float score;
+    private int id;
+    private String studentId;
+    private String courseId;
+    private float student_score;
     private String descp;
 
-    public score(Integer student_id, Integer course_id, Integer major_id, float score, String descp) {
-        this.student_id = student_id;
-        this.course_id = course_id;
-        this.major_id = major_id;
-        this.score = score;
+    public score(int id, String studentId, String courseId, float student_score, String descp) {
+        this.id = id;
+        this.studentId = studentId;
+        this.courseId = courseId;
+        this.student_score = student_score;
         this.descp = descp;
     }
 
-    public Integer getStudent_id() {
-        return student_id;
+    public int getId() {
+        return id;
+    }
+    
+    public String getStudentId() {
+        return studentId;
     }
 
-    public Integer getCourse_id() {
-        return course_id;
+    public String getCourseId() {
+        return courseId;
     }
 
-    public Integer getMajor_id() {
-        return major_id;
+    public float getStudent_score() {
+        return student_score;
     }
 
     public String getDescp() {
         return descp;
     }
-
-    public float getScore() {
-        return score;
-    }
+    
+    
+    
     
     
 }

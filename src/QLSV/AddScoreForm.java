@@ -5,7 +5,8 @@
  */
 package QLSV;
 
-import static QLSV.ManageCourseForm.tbl_course;
+
+import static QLSV.ManageStudentForm.tbl_student;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -25,9 +26,8 @@ public class AddScoreForm extends javax.swing.JFrame {
     public AddScoreForm() {
         initComponents();
         Show_Scores_In_JTable();
-        student.fillStudentCombo(jComboBox1);
-        course.fillCourseCombo(cbb_course_id);
-        major.fillMajorCombo(cbb_major_id);
+        student.fillStudentCombo(cbb_student_id);
+        course.fillCourseCombo(cbb_course_id);       
     }
     
     // Check Input
@@ -62,7 +62,7 @@ public class AddScoreForm extends javax.swing.JFrame {
             score scr;
             
             while(rs.next()){
-                scr = new score(rs.getInt("student_id"), rs.getInt("course_id"), rs.getInt("major_id"), rs.getFloat("student_score"), rs.getString("description"));
+                scr = new score(rs.getInt("id"), rs.getString("student_id"), rs.getString("course_id"), rs.getFloat("student_score"), rs.getString("description"));
                 scoreList.add(scr);
             }
         } catch (SQLException ex)
@@ -83,15 +83,24 @@ public class AddScoreForm extends javax.swing.JFrame {
        model.setRowCount(0);
        Object[] row = new Object[5];
        for(int i = 0; i < list.size(); i++){
-           row[0] = list.get(i).getStudent_id();
-           row[1] = list.get(i).getCourse_id();
-           row[2] = list.get(i).getMajor_id();
-           row[3] = list.get(i).getScore(); 
+           row[0] = list.get(i).getId();
+           row[1] = list.get(i).getStudentId();
+           row[2] = list.get(i).getCourseId();
+           row[3] = list.get(i).getStudent_score(); 
            row[4] = list.get(i).getDescp();
            model.addRow(row);
        }
    }
    
+   // Show Item
+   public void ShowStudent(int rowIndex){
+       DefaultTableModel model = (DefaultTableModel)tbl_student.getModel();
+       txt_id.setText(model.getValueAt(rowIndex, 0).toString());
+        cbb_student_id.setSelectedItem(model.getValueAt(rowIndex, 1).toString());
+        cbb_course_id.setSelectedItem(model.getValueAt(rowIndex, 2).toString());
+        txt_score.setText(model.getValueAt(rowIndex, 3).toString());
+        txt_description.setText(model.getValueAt(rowIndex, 4).toString());
+   }
    
 
     /**
@@ -114,11 +123,11 @@ public class AddScoreForm extends javax.swing.JFrame {
         cbb_course_id = new javax.swing.JComboBox<>();
         btn_cancel = new javax.swing.JButton();
         btn_add = new javax.swing.JButton();
-        cbb_major_id = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_score = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbb_student_id = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        txt_id = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,21 +173,27 @@ public class AddScoreForm extends javax.swing.JFrame {
             }
         });
 
-        cbb_major_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbb_major_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("Major Id :");
-
         tbl_score.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Student id", "Course id", "Major id", "Score", "Description"
+                "Id", "Student Id", "Course Id", "Score", "Description"
             }
         ));
+        tbl_score.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_scoreMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_score);
+
+        cbb_student_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText(" Id :");
+
+        txt_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -187,7 +202,7 @@ public class AddScoreForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(313, 313, 313)
                 .addComponent(jLabel1)
-                .addContainerGap(443, Short.MAX_VALUE))
+                .addContainerGap(463, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -203,10 +218,10 @@ public class AddScoreForm extends javax.swing.JFrame {
                             .addComponent(cbb_course_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btn_cancel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbb_major_id, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(cbb_student_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_id, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5)
@@ -214,7 +229,7 @@ public class AddScoreForm extends javax.swing.JFrame {
                         .addComponent(txt_description, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(57, 57, 57))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,35 +238,35 @@ public class AddScoreForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
+                            .addComponent(cbb_student_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(cbb_course_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                        .addGap(51, 51, 51)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbb_major_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txt_score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
+                            .addComponent(txt_score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txt_description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
+                        .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_cancel)
                             .addComponent(btn_add))
-                        .addGap(65, 65, 65))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))))
+                        .addGap(22, 22, 22))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(22, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -262,7 +277,9 @@ public class AddScoreForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -276,12 +293,11 @@ public class AddScoreForm extends javax.swing.JFrame {
        if(checkInputs()){
             try {
                 Connection con = MyConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement("INSERT INTO score(student_id, course_id, major_id, student_score, description) VALUES (?,?,?,?,?)");
-                ps.setString(1, (String) jComboBox1.getSelectedItem());
+                PreparedStatement ps = con.prepareStatement("INSERT INTO score(student_id, course_id, student_score, description) VALUES (?,?,?,?)");               
+                ps.setString(1, (String) cbb_student_id.getSelectedItem());
                 ps.setString(2, (String) cbb_course_id.getSelectedItem());
-                ps.setString(3, (String) cbb_major_id.getSelectedItem());
-                ps.setFloat(4, Float.valueOf(txt_score.getText()));
-                ps.setString(5, txt_description.getText());
+                ps.setFloat(3, Float.valueOf(txt_score.getText()));
+                ps.setString(4, txt_description.getText());
                 ps.executeUpdate();
                 Show_Scores_In_JTable();
                 JOptionPane.showMessageDialog(null, "New Scores added !!!");
@@ -292,6 +308,16 @@ public class AddScoreForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "One or more field are empty !!!");
         }
     }//GEN-LAST:event_btn_addActionPerformed
+
+    private void tbl_scoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_scoreMouseClicked
+        int rowIndex = tbl_score.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tbl_score.getModel();
+        txt_id.setText(model.getValueAt(rowIndex, 0).toString());
+        cbb_student_id.setSelectedItem(model.getValueAt(rowIndex, 1).toString());
+        cbb_course_id.setSelectedItem(model.getValueAt(rowIndex, 2).toString());
+        txt_score.setText(model.getValueAt(rowIndex, 3).toString());
+        txt_description.setText(model.getValueAt(rowIndex, 4).toString());
+    }//GEN-LAST:event_tbl_scoreMouseClicked
 
     /**
      * @param args the command line arguments
@@ -339,8 +365,7 @@ public class AddScoreForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_cancel;
     private javax.swing.JComboBox<String> cbb_course_id;
-    private javax.swing.JComboBox<String> cbb_major_id;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbb_student_id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -351,6 +376,7 @@ public class AddScoreForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbl_score;
     private javax.swing.JTextField txt_description;
+    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_score;
     // End of variables declaration//GEN-END:variables
 }

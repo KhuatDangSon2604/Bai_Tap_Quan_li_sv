@@ -373,7 +373,7 @@ public class ManageMajorForm extends javax.swing.JFrame {
                 ps.executeUpdate();
                 Show_Majors_In_JTable();
                 JOptionPane.showMessageDialog(null, "Major deleted !!!");
-                MainForm.lbl_major_count.setText("Majors count = " + Integer.toString(MyFunction.countData("major")));
+                MainFormForAdmin.lbl_major_count.setText("Majors count = " + Integer.toString(MyFunction.countData("major")));
             } catch (SQLException ex)
             {
                 Logger.getLogger(ManageMajorForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -412,7 +412,7 @@ public class ManageMajorForm extends javax.swing.JFrame {
                 Show_Majors_In_JTable();
 
                 JOptionPane.showMessageDialog(null, "Major Updated !!!");
-                MainForm.lbl_major_count.setText("Majors count = " + Integer.toString(MyFunction.countData("major")));
+                MainFormForAdmin.lbl_major_count.setText("Majors count = " + Integer.toString(MyFunction.countData("major")));
             } catch (SQLException ex) {
                 Logger.getLogger(ManageMajorForm.class.getName()).log(Level.SEVERE, null, ex);
             }

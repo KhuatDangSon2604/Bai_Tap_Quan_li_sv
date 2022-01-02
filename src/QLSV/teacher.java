@@ -1,6 +1,14 @@
 
 package QLSV;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+
 
 public class teacher {
     private int id;
@@ -53,6 +61,47 @@ public class teacher {
 
     public byte[] getPicture() {
         return picture;
+    }
+    
+    private int getStudentId(String teachername){
+        int teacherId = 0;
+        
+        Connection con = MyConnection.getConnection();
+        PreparedStatement ps;
+           try
+           {
+               ps = con.prepareStatement("SELECT * FROM `teacher` WHERE `name` = ?");
+               ps.setString(1, teachername);
+               
+               ResultSet rs = ps.executeQuery();
+               
+               if(rs.next()){
+                   teacherId = rs.getInt("id");
+               }
+           } catch (SQLException ex)
+           {
+               Logger.getLogger(teacher.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        return teacherId;
+    }
+    
+    public static void fillTeacherCombo(JComboBox combo){
+        Connection con = MyConnection.getConnection();
+        PreparedStatement ps;
+        
+        try
+        {
+            ps = con.prepareStatement("SELECT * FROM `teacher`");
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                combo.addItem(rs.getString(2));
+            }
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(teacher.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

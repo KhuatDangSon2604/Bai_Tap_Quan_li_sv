@@ -432,7 +432,7 @@ public class AddTeacherForm extends javax.swing.JFrame {
                 ps.executeUpdate();
                 Show_Teachers_In_JTable();
                 JOptionPane.showMessageDialog(null, "New Teacher Added !!!");
-                MainForm.lbl_teacher_count.setText("Teachers count = " + Integer.toString(MyFunction.countData("teacher")));
+                MainFormForAdmin.lbl_teacher_count.setText("Teachers count = " + Integer.toString(MyFunction.countData("teacher")));
             } catch (Exception ex)
             {
                 JOptionPane.showMessageDialog(null, ex.getMessage());

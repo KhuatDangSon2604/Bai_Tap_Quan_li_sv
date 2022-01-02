@@ -38,6 +38,7 @@ public class AddStudentForm extends javax.swing.JFrame {
      */
     public AddStudentForm() {
         initComponents();
+        major.fillMajorCombo(cbb_major_id);
         // Gioi tinh ban dau
         ButtonGroup bg = new ButtonGroup();
         bg.add(rbd_female);
@@ -90,9 +91,8 @@ public class AddStudentForm extends javax.swing.JFrame {
    
    public boolean checkInputs(){
        if(txt_name.getText() == null
-          || txt_major.getText() == null
+          || cbb_major_id.getSelectedItem()== null
           || DateChooser_Birthdate.getDate() == null
-          || txt_major.getText() == null
           || txt_address.getText() == null
           || txt_phone_number.getText() == null
           || txt_email.getText() == null
@@ -190,7 +190,6 @@ public class AddStudentForm extends javax.swing.JFrame {
         lbl_image = new javax.swing.JLabel();
         btn_Choose_image = new javax.swing.JButton();
         txt_name = new javax.swing.JTextField();
-        txt_major = new javax.swing.JTextField();
         txt_phone_number = new javax.swing.JTextField();
         txt_address = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
@@ -199,6 +198,7 @@ public class AddStudentForm extends javax.swing.JFrame {
         DateChooser_Birthdate = new com.toedter.calendar.JDateChooser();
         btn_add = new javax.swing.JButton();
         btn_cancel = new javax.swing.JButton();
+        cbb_major_id = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -244,8 +244,6 @@ public class AddStudentForm extends javax.swing.JFrame {
 
         txt_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txt_major.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         txt_phone_number.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_phone_number.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -286,6 +284,8 @@ public class AddStudentForm extends javax.swing.JFrame {
             }
         });
 
+        cbb_major_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -313,9 +313,9 @@ public class AddStudentForm extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbb_major_id, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btn_Choose_image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_name, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_major, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                                 .addComponent(txt_phone_number, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                                 .addComponent(txt_address, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                                 .addComponent(txt_email, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
@@ -348,7 +348,7 @@ public class AddStudentForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txt_major, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbb_major_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -367,7 +367,7 @@ public class AddStudentForm extends javax.swing.JFrame {
                     .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btn_Choose_image)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_add)
                     .addComponent(btn_cancel))
@@ -421,7 +421,7 @@ public class AddStudentForm extends javax.swing.JFrame {
                 String addDate = dateFormat.format(DateChooser_Birthdate.getDate());
                 ps.setString(3, addDate);
                 // them cac du kien khac
-                ps.setString(4, txt_major.getText());
+                ps.setString(4, (String)cbb_major_id.getSelectedItem());
                 ps.setString(5, txt_address.getText());
                 ps.setString(6, txt_phone_number.getText());
                 ps.setString(7, txt_email.getText());
@@ -431,7 +431,7 @@ public class AddStudentForm extends javax.swing.JFrame {
                 ps.executeUpdate();
                 Show_Students_In_JTable();
                 JOptionPane.showMessageDialog(null, "New Student Added !!!");
-                MainForm.lbl_student_count.setText("Students count = " + Integer.toString(MyFunction.countData("student")));
+                MainFormForAdmin.lbl_student_count.setText("Students count = " + Integer.toString(MyFunction.countData("student")));
             } catch (Exception ex)
             {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -507,6 +507,7 @@ public class AddStudentForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_Choose_image;
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_cancel;
+    private javax.swing.JComboBox<String> cbb_major_id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -522,7 +523,6 @@ public class AddStudentForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbd_male;
     private javax.swing.JTextField txt_address;
     private javax.swing.JTextField txt_email;
-    private javax.swing.JTextField txt_major;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_phone_number;
     // End of variables declaration//GEN-END:variables

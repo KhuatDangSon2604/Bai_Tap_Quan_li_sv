@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/score.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/course.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/student.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/AddCourseForm.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/ManageCourseForm.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/AddScoreForm.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/ManageStudentForm.java</file>
+            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/LoginForm.java</file>
+            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/MainFormForTeacher.java</file>
+            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/MainFormForStudent.java</file>
+            <file>file:/C:/Users/DELL/OneDrive/Documents/NetBeansProjects/Bai_Tap_Quan_li_sv/src/QLSV/MainFormForAdmin.java</file>
         </group>
     </open-files>
 </project-private>

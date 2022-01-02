@@ -12,13 +12,15 @@ import javax.swing.JComboBox;
 public class course {
     private int id;
     private String label;
+    private String teacher;
     private Integer hours;
     private Integer credits;
 
        
-    public course(int id,String label, Integer hours, Integer credits) {
+    public course(int id,String label, String teacher, Integer hours, Integer credits) {
         this.id = id;
         this.label = label;
+        this.teacher = teacher;
         this.hours = hours;
         this.credits = credits;
     }
@@ -31,6 +33,10 @@ public class course {
         return hours;
     }
 
+    public String getTeacher() {
+        return teacher;
+    }    
+    
     public Integer getCredits() {
         return credits;
     }
@@ -64,6 +70,7 @@ public class course {
         return isExist;
     }
     
+    // lay id cua course
     private int getCourseId(String courselabel){
         int courseId = 0;
         

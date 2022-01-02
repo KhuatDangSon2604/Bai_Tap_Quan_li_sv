@@ -222,7 +222,7 @@ public class AddMajorForm extends javax.swing.JFrame {
                 ps.executeUpdate();
                 Show_Majors_In_JTable();
                 JOptionPane.showMessageDialog(null, "New Major added !!!");
-                MainForm.lbl_major_count.setText("Majors count = " + Integer.toString(MyFunction.countData("major")));
+                MainFormForAdmin.lbl_major_count.setText("Majors count = " + Integer.toString(MyFunction.countData("major")));
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }

@@ -25,12 +25,14 @@ public class AddCourseForm extends javax.swing.JFrame {
      */
     public AddCourseForm() {
         initComponents();
+        teacher.fillTeacherCombo(cbb_teacher_name);
     }
     
     // Check Input Fields
    
    public boolean checkInputs(){
        if(txt_label.getText() == null
+               || cbb_teacher_name.getSelectedItem() == null
                || Integer.valueOf(txt_hours.getValue().toString()) < 0
                || Integer.valueOf(txt_credits.getValue().toString()) < 0
           )
@@ -66,7 +68,7 @@ public class AddCourseForm extends javax.swing.JFrame {
             course crs;
             
             while(rs.next()){
-                crs = new course(rs.getInt("id"), rs.getString("label"), rs.getInt("hours_number"), rs.getInt("So_tin_chi"));
+                crs = new course(rs.getInt("id"), rs.getString("label"), rs.getString("teacher"), rs.getInt("hours_number"), rs.getInt("So_tin_chi"));
                 courseList.add(crs);
             }
         } catch (SQLException ex)
@@ -113,6 +115,8 @@ public class AddCourseForm extends javax.swing.JFrame {
         txt_credits = new javax.swing.JSpinner();
         btn_add = new javax.swing.JButton();
         btn_cancel = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        cbb_teacher_name = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,6 +160,11 @@ public class AddCourseForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("Teacher :");
+
+        cbb_teacher_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -171,19 +180,24 @@ public class AddCourseForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_hours)
-                                .addComponent(txt_credits, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txt_label)))
+                            .addComponent(txt_label)
+                            .addComponent(cbb_teacher_name, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_credits, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_hours, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(96, Short.MAX_VALUE)
                         .addComponent(btn_cancel)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(72, 72, 72))
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,9 +210,13 @@ public class AddCourseForm extends javax.swing.JFrame {
                     .addComponent(txt_label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addComponent(cbb_teacher_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_hours, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_credits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -228,14 +246,15 @@ public class AddCourseForm extends javax.swing.JFrame {
         if(checkInputs() && !course.isCourseExist(txt_label.getText())){
             try {
                 Connection con = MyConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement("INSERT INTO course(label, hours_number, So_tin_chi) VALUES (?,?,?)");
+                PreparedStatement ps = con.prepareStatement("INSERT INTO course(label, teacher, hours_number, So_tin_chi) VALUES (?,?,?,?)");
                 ps.setString(1, txt_label.getText());
-                ps.setInt(2, Integer.valueOf(txt_hours.getValue().toString()));
-                ps.setInt(3, Integer.valueOf(txt_credits.getValue().toString()));
+                ps.setString(2, cbb_teacher_name.getSelectedItem().toString());
+                ps.setInt(3, Integer.valueOf(txt_hours.getValue().toString()));
+                ps.setInt(4, Integer.valueOf(txt_credits.getValue().toString()));
                 ps.executeUpdate();
                 Show_Courses_In_JTable();
                 JOptionPane.showMessageDialog(null, "New Course added !!!");
-                MainForm.lbl_course_count.setText("Courses count = " + Integer.toString(MyFunction.countData("course")));
+                MainFormForAdmin.lbl_course_count.setText("Courses count = " + Integer.toString(MyFunction.countData("course")));
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
@@ -294,10 +313,12 @@ public class AddCourseForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_cancel;
+    private javax.swing.JComboBox<String> cbb_teacher_name;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSpinner txt_credits;
     private javax.swing.JSpinner txt_hours;

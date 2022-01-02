@@ -49,6 +49,8 @@ public class LoginForm extends javax.swing.JFrame {
         btn_login = new javax.swing.JButton();
         lbl_li1 = new javax.swing.JLabel();
         lbl_li2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cbb_role = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +103,12 @@ public class LoginForm extends javax.swing.JFrame {
         lbl_li2.setForeground(new java.awt.Color(255, 153, 0));
         lbl_li2.setText("*");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel5.setText("Role :");
+
+        cbb_role.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbb_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Student", "Teacher", " " }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,23 +119,26 @@ public class LoginForm extends javax.swing.JFrame {
                         .addGap(180, 180, 180)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(btn_cancel)
-                        .addGap(50, 50, 50)
-                        .addComponent(btn_login))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_username)
-                            .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(CheckBox_hide_show_password, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_username)
+                                    .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(CheckBox_hide_show_password, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel4))
+                                    .addComponent(cbb_role, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btn_cancel)
+                                .addGap(48, 48, 48)
+                                .addComponent(btn_login)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_li1)
@@ -146,18 +157,22 @@ public class LoginForm extends javax.swing.JFrame {
                     .addComponent(lbl_li1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
                     .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_li2))
-                .addGap(18, 18, 18)
+                    .addComponent(lbl_li2)
+                    .addComponent(jLabel3))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cbb_role, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CheckBox_hide_show_password)
-                    .addComponent(jLabel4))
-                .addGap(25, 25, 25)
+                    .addComponent(CheckBox_hide_show_password, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancel)
                     .addComponent(btn_login))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,7 +183,9 @@ public class LoginForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,7 +201,8 @@ public class LoginForm extends javax.swing.JFrame {
         else{
             Connection con = MyConnection.getConnection();
             PreparedStatement ps;
-            try
+            if(cbb_role.getSelectedItem().equals("Admin")){
+                try
             {
                 ps = con.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
                 ps.setString(1, txt_username.getText());
@@ -193,28 +211,98 @@ public class LoginForm extends javax.swing.JFrame {
                 ResultSet rs = ps.executeQuery();
                 
                 if(rs.next()){
-                    MainForm mf = new MainForm();
+                    MainFormForAdmin mf = new MainFormForAdmin();
                     mf.setVisible(true);
                     mf.pack();
                     mf.setLocationRelativeTo(null);
                     mf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                    MainForm.lbl_username.setText("Welcome<" + txt_username.getText() + ">");
+                    MainFormForAdmin.lbl_username.setText("Welcome<" + txt_username.getText() + ">");
+                    MainFormForAdmin.lbl_log.setText("You logged as : Admin");
                     // We will change this with student table
-                    MainForm.lbl_student_count.setText("Students count = " + Integer.toString(MyFunction.countData("student")));
+                    MainFormForAdmin.lbl_student_count.setText("Students count = " + Integer.toString(MyFunction.countData("student")));
                     // We will change this with teacher table
-                    MainForm.lbl_teacher_count.setText("Teachers count = " + Integer.toString(MyFunction.countData("teacher")));
+                    MainFormForAdmin.lbl_teacher_count.setText("Teachers count = " + Integer.toString(MyFunction.countData("teacher")));
                     // We will change this with course table
-                    MainForm.lbl_course_count.setText("Courses count = " + Integer.toString(MyFunction.countData("course")));
+                    MainFormForAdmin.lbl_course_count.setText("Courses count = " + Integer.toString(MyFunction.countData("course")));
                     // We will change this with major table
-                    MainForm.lbl_major_count.setText("Majors count = " + Integer.toString(MyFunction.countData("major")));
+                    MainFormForAdmin.lbl_major_count.setText("Majors count = " + Integer.toString(MyFunction.countData("major")));
                     this.dispose();
                 }else{
                     System.out.println("NO");
                 }
-            } catch (SQLException ex)
+                } catch (SQLException ex)
             {
                 java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
+           }if(cbb_role.getSelectedItem().equals("Student")){
+               try
+            {
+                ps = con.prepareStatement("SELECT * FROM student WHERE name = ? AND Email = ?");
+                ps.setString(1, txt_username.getText());
+                ps.setString(2, String.valueOf(txt_password.getPassword()));
+                
+                ResultSet rs = ps.executeQuery();
+                
+                if(rs.next()){
+                    MainFormForStudent mf = new MainFormForStudent();
+                    mf.setVisible(true);
+                    mf.pack();
+                    mf.setLocationRelativeTo(null);
+                    mf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    MainFormForStudent.lbl_username.setText("Welcome<" + txt_username.getText() + ">");
+                    MainFormForStudent.lbl_log.setText("You logged as : Student");
+                    // We will change this with student table
+                    MainFormForStudent.lbl_student_count.setText("Students count = " + Integer.toString(MyFunction.countData("student")));
+                    // We will change this with teacher table
+                    MainFormForStudent.lbl_teacher_count.setText("Teachers count = " + Integer.toString(MyFunction.countData("teacher")));
+                    // We will change this with course table
+                    MainFormForStudent.lbl_course_count.setText("Courses count = " + Integer.toString(MyFunction.countData("course")));
+                    // We will change this with major table
+                    MainFormForStudent.lbl_major_count.setText("Majors count = " + Integer.toString(MyFunction.countData("major")));
+                    this.dispose();
+                }else{
+                    System.out.println("NO");
+                }
+                } catch (SQLException ex)
+            {
+                java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+           }if(cbb_role.getSelectedItem().equals("Teacher")){
+               try
+            {
+                ps = con.prepareStatement("SELECT * FROM teacher WHERE name = ? AND Email = ?");
+                ps.setString(1, txt_username.getText());
+                ps.setString(2, String.valueOf(txt_password.getPassword()));
+                
+                ResultSet rs = ps.executeQuery();
+                
+                if(rs.next()){
+                    MainFormForTeacher mf = new MainFormForTeacher();
+                    mf.setVisible(true);
+                    mf.pack();
+                    mf.setLocationRelativeTo(null);
+                    mf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    MainFormForTeacher.lbl_username.setText("Welcome<" + txt_username.getText() + ">");
+                    MainFormForTeacher.lbl_log.setText("You are logged as : Teacher");
+                    // We will change this with student table
+                    MainFormForTeacher.lbl_student_count.setText("Students count = " + Integer.toString(MyFunction.countData("student")));
+                    // We will change this with teacher table
+                    MainFormForTeacher.lbl_teacher_count.setText("Teachers count = " + Integer.toString(MyFunction.countData("teacher")));
+                    // We will change this with course table
+                    MainFormForTeacher.lbl_course_count.setText("Courses count = " + Integer.toString(MyFunction.countData("course")));
+                    // We will change this with major table
+                    MainFormForTeacher.lbl_major_count.setText("Majors count = " + Integer.toString(MyFunction.countData("major")));
+                    this.dispose();
+                }else{
+                    System.out.println("NO");
+                }
+                } catch (SQLException ex)
+            {
+                java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+           }
+            
+            
         }
     }//GEN-LAST:event_btn_loginActionPerformed
 
@@ -279,10 +367,12 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JCheckBox CheckBox_hide_show_password;
     private javax.swing.JButton btn_cancel;
     private javax.swing.JButton btn_login;
+    private javax.swing.JComboBox<String> cbb_role;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_li1;
     private javax.swing.JLabel lbl_li2;

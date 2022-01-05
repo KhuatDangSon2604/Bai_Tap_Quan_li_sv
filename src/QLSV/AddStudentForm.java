@@ -195,10 +195,10 @@ public class AddStudentForm extends javax.swing.JFrame {
         txt_email = new javax.swing.JTextField();
         rbd_male = new javax.swing.JRadioButton();
         rbd_female = new javax.swing.JRadioButton();
-        DateChooser_Birthdate = new com.toedter.calendar.JDateChooser();
         btn_add = new javax.swing.JButton();
         btn_cancel = new javax.swing.JButton();
         cbb_major_id = new javax.swing.JComboBox<>();
+        DateChooser_Birthdate = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -264,8 +264,6 @@ public class AddStudentForm extends javax.swing.JFrame {
 
         rbd_female.setText("Female");
 
-        DateChooser_Birthdate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         btn_add.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/plus-5-24 (1).png"))); // NOI18N
         btn_add.setText("Add");
@@ -285,6 +283,8 @@ public class AddStudentForm extends javax.swing.JFrame {
         });
 
         cbb_major_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        DateChooser_Birthdate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -313,6 +313,7 @@ public class AddStudentForm extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(DateChooser_Birthdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cbb_major_id, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btn_Choose_image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_name, javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +324,6 @@ public class AddStudentForm extends javax.swing.JFrame {
                                     .addComponent(rbd_male)
                                     .addGap(18, 18, 18)
                                     .addComponent(rbd_female))
-                                .addComponent(DateChooser_Birthdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lbl_image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
@@ -367,7 +367,7 @@ public class AddStudentForm extends javax.swing.JFrame {
                     .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btn_Choose_image)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_add)
                     .addComponent(btn_cancel))

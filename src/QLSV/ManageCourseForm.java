@@ -24,9 +24,9 @@ public class ManageCourseForm extends javax.swing.JFrame {
      * Creates new form ManageCourseForm
      */
     public ManageCourseForm() {
-        initComponents();
-        teacher.fillTeacherCombo(cbb_teacher);
+        initComponents();       
         setLocationRelativeTo(null);
+        teacher.fillTeacherCombo(cbb_teacher);
         Show_Courses_In_JTable();
         tbl_course.setRowHeight(40);
         tbl_course.setShowGrid(true);
@@ -436,8 +436,13 @@ public class ManageCourseForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void tbl_courseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_courseMouseClicked
-        int index = tbl_course.getSelectedRow();
-        ShowCourse(index);
+        int rowIndex = tbl_course.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)tbl_course.getModel();
+        txt_id.setText(model.getValueAt(rowIndex, 0).toString());
+        txt_label.setText(model.getValueAt(rowIndex, 1).toString());
+        cbb_teacher.setSelectedItem(model.getValueAt(rowIndex, 2).toString());
+        txt_hours.setValue(Integer.valueOf(model.getValueAt(rowIndex, 3).toString()));
+        txt_credits.setValue(Integer.valueOf(model.getValueAt(rowIndex, 4).toString()));
     }//GEN-LAST:event_tbl_courseMouseClicked
 
     private void btn_firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_firstActionPerformed

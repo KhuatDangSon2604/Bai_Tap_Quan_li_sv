@@ -33,7 +33,7 @@ public class major {
         return student_number;
     }
     
-    // Kiem tra xem co ton tai khoa hoc giong tu truoc ko
+    // Kiem tra xem co ton tai nganh hoc giong tu truoc ko
     public static boolean isMajorExist(String majorname){
         
         boolean isExist = false;

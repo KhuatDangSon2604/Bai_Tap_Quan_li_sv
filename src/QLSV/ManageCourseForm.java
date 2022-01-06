@@ -9,7 +9,11 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,8 +30,9 @@ public class ManageCourseForm extends javax.swing.JFrame {
     public ManageCourseForm() {
         initComponents();       
         setLocationRelativeTo(null);
-        teacher.fillTeacherCombo(cbb_teacher);
+        teacher.fillTeacherCombo(cbb_teacher); // Lay ten cua teacher dien vao Combobox
         Show_Courses_In_JTable();
+        // Tao luoi va chinh lai 1 xiu table
         tbl_course.setRowHeight(40);
         tbl_course.setShowGrid(true);
         tbl_course.setGridColor(Color.gray);
@@ -377,6 +382,7 @@ public class ManageCourseForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_labelActionPerformed
 
+    // Chinh sua 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         if(checkInputs()){
             String UpdateQuery = null;
@@ -404,6 +410,7 @@ public class ManageCourseForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_editActionPerformed
 
+    // Xoa khoa hoc
     private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
         if(!txt_id.getText().equals("")){
             Connection con = MyConnection.getConnection();
@@ -426,6 +433,7 @@ public class ManageCourseForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_removeActionPerformed
 
+    // Mo form them khoa hoc
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         AddCourseForm acf = new AddCourseForm();
         acf.setVisible(true);
@@ -435,6 +443,7 @@ public class ManageCourseForm extends javax.swing.JFrame {
         Show_Courses_In_JTable();
     }//GEN-LAST:event_btn_addActionPerformed
 
+    // Hien thi du lieu bang len Jtextfield, JCombobox...
     private void tbl_courseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_courseMouseClicked
         int rowIndex = tbl_course.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel)tbl_course.getModel();
@@ -445,16 +454,19 @@ public class ManageCourseForm extends javax.swing.JFrame {
         txt_credits.setValue(Integer.valueOf(model.getValueAt(rowIndex, 4).toString()));
     }//GEN-LAST:event_tbl_courseMouseClicked
 
+    // Vi tri ban dau
     private void btn_firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_firstActionPerformed
         pos = 0;
         ShowCourse(pos);
     }//GEN-LAST:event_btn_firstActionPerformed
 
+    // Vi tri ket thuc
     private void btn_lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lastActionPerformed
         pos = getCourseList().size() - 1;
         ShowCourse(pos);
     }//GEN-LAST:event_btn_lastActionPerformed
 
+    // Vi tri dang truoc
     private void btn_prevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_prevActionPerformed
         pos--;
         if(pos < 0){
@@ -463,6 +475,7 @@ public class ManageCourseForm extends javax.swing.JFrame {
         ShowCourse(pos);
     }//GEN-LAST:event_btn_prevActionPerformed
 
+    // Vi tri phia sau
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         pos++;
         if(pos >= getCourseList().size()){
@@ -471,6 +484,7 @@ public class ManageCourseForm extends javax.swing.JFrame {
         ShowCourse(pos);
     }//GEN-LAST:event_btn_nextActionPerformed
 
+    // Dieu huong bang bang phim mui ten
     private void tbl_courseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_courseKeyReleased
         if(evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN){
             int index = tbl_course.getSelectedRow();

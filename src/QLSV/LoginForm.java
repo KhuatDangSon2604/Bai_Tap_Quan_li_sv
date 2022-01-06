@@ -201,6 +201,7 @@ public class LoginForm extends javax.swing.JFrame {
         else{
             Connection con = MyConnection.getConnection();
             PreparedStatement ps;
+            // Mo MainForm Cho Admin
             if(cbb_role.getSelectedItem().equals("Admin")){
                 try
             {
@@ -234,7 +235,9 @@ public class LoginForm extends javax.swing.JFrame {
             {
                 java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-           }if(cbb_role.getSelectedItem().equals("Student")){
+           }
+            // Mo MainForm cho Student
+            if(cbb_role.getSelectedItem().equals("Student")){
                try
             {
                 ps = con.prepareStatement("SELECT * FROM student WHERE name = ? AND Email = ?");
@@ -267,7 +270,9 @@ public class LoginForm extends javax.swing.JFrame {
             {
                 java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-           }if(cbb_role.getSelectedItem().equals("Teacher")){
+           }
+            // Mo MainForm cho Teacher
+            if(cbb_role.getSelectedItem().equals("Teacher")){
                try
             {
                 ps = con.prepareStatement("SELECT * FROM teacher WHERE name = ? AND Email = ?");

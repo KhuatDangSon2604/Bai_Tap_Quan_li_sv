@@ -550,6 +550,7 @@ public class ManageTeacherForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Chon Anh
     private void btn_Choose_imageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Choose_imageActionPerformed
         JFileChooser file = new JFileChooser();
         file.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -569,6 +570,7 @@ public class ManageTeacherForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_Choose_imageActionPerformed
 
+    // Chi cho nhap so trong phan nhap so dien thoai
     private void txt_phone_numberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_phone_numberKeyTyped
         // Allow only number
         if(!Character.isDigit(evt.getKeyChar())){
@@ -580,6 +582,7 @@ public class ManageTeacherForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_emailActionPerformed
 
+    // Chinh sua giao vien
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         if(checkInputs() && txt_id.getText() != null){
             String UpdateQuery = null;
@@ -668,6 +671,7 @@ public class ManageTeacherForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_editActionPerformed
 
+    // Xoa giao vien
     private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
         if(!txt_id.getText().equals("")){
             Connection con = MyConnection.getConnection();
@@ -690,6 +694,7 @@ public class ManageTeacherForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_removeActionPerformed
 
+    // mo form them giao vien
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         AddTeacherForm atf = new AddTeacherForm();
         atf.setVisible(true);
@@ -699,6 +704,7 @@ public class ManageTeacherForm extends javax.swing.JFrame {
         Show_Teachers_In_JTable();
     }//GEN-LAST:event_btn_addActionPerformed
 
+    // Hien thi du lieu giao vien tu bang len JTextfield, JCombobox ...
     private void tbl_teacherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_teacherMouseClicked
 
         int rowIndex = tbl_teacher.getSelectedRow();
@@ -728,11 +734,13 @@ public class ManageTeacherForm extends javax.swing.JFrame {
         lbl_image.setIcon(ResizeImage(null, getTeacherList().get(rowIndex).getPicture()));
     }//GEN-LAST:event_tbl_teacherMouseClicked
 
+    // Vi tri ban dau
     private void btn_firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_firstActionPerformed
         pos = 0;
         ShowTeacher(pos);
     }//GEN-LAST:event_btn_firstActionPerformed
 
+    // Vi tri phia truoc
     private void btn_prevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_prevActionPerformed
         pos--;
 
@@ -742,6 +750,7 @@ public class ManageTeacherForm extends javax.swing.JFrame {
         ShowTeacher(pos);
     }//GEN-LAST:event_btn_prevActionPerformed
 
+    // Vi tri phia sau
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         pos++;
 
@@ -751,11 +760,13 @@ public class ManageTeacherForm extends javax.swing.JFrame {
         ShowTeacher(pos);
     }//GEN-LAST:event_btn_nextActionPerformed
 
+    // Vi tri cuoi cung
     private void btn_lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lastActionPerformed
         pos = getTeacherList().size() -1;
         ShowTeacher(pos);
     }//GEN-LAST:event_btn_lastActionPerformed
 
+    // Tim kiem giao vien trong bang
     private void txt_val_findKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_val_findKeyReleased
         DefaultTableModel model = (DefaultTableModel)tbl_teacher.getModel();
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
@@ -767,36 +778,14 @@ public class ManageTeacherForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txt_val_findKeyTyped
 
+    // Dieu huong bang bang mui ten
     private void tbl_teacherKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_teacherKeyReleased
         if(evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN){
             int rowIndex = tbl_teacher.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel)tbl_teacher.getModel();
-        txt_id.setText(model.getValueAt(rowIndex, 0).toString());
-        txt_name.setText(model.getValueAt(rowIndex, 1).toString());
-        if(model.getValueAt(rowIndex, 2).toString().equals("male")){
-            rbd_male.setSelected(true);
-            rbd_female.setSelected(false);
-        }else{
-            rbd_female.setSelected(true);
-            rbd_male.setSelected(false);
-        }
-        try
-        {
-
-            Date addDate = null;
-            addDate = new SimpleDateFormat("yyyy-MM-dd").parse((String)getTeacherList().get(rowIndex).getBdate());
-            DateChooser_Birthdate.setDate(addDate);
-        } catch (ParseException ex)
-        {
-            Logger.getLogger(ManageStudentForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        txt_email.setText(model.getValueAt(rowIndex, 4).toString());
-        txt_address.setText(model.getValueAt(rowIndex, 5).toString());
-        txt_phone_number.setText(model.getValueAt(rowIndex, 6).toString());
-        lbl_image.setIcon(ResizeImage(null, getTeacherList().get(rowIndex).getPicture()));
+            ShowTeacher(rowIndex);
         }
     }//GEN-LAST:event_tbl_teacherKeyReleased
-
+    
     /**
      * @param args the command line arguments
      */

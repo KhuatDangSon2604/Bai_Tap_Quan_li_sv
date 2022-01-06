@@ -5,7 +5,6 @@
  */
 package QLSV;
 
-import static QLSV.ManageStudentForm.tbl_student;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -365,6 +364,7 @@ public class ManageScoreForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Mo bang them diem
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         AddScoreForm asf = new AddScoreForm();
         asf.setVisible(true);
@@ -373,6 +373,7 @@ public class ManageScoreForm extends javax.swing.JFrame {
         asf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btn_addActionPerformed
 
+    // Hien thi du lieu cua bang len JTextfield, JCombobox...
     private void tbl_scoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_scoreMouseClicked
         int rowIndex = tbl_score.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tbl_score.getModel();
@@ -383,29 +384,34 @@ public class ManageScoreForm extends javax.swing.JFrame {
         txt_description.setText(model.getValueAt(rowIndex, 4).toString());
     }//GEN-LAST:event_tbl_scoreMouseClicked
 
+    // Vi tri dau tien
     private void btn_firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_firstActionPerformed
         pos = 0;
         ShowScore(pos);
     }//GEN-LAST:event_btn_firstActionPerformed
 
+    // Vi tri ket thuc
     private void btn_lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lastActionPerformed
         pos = getScoreList().size() - 1;
         ShowScore(pos);
     }//GEN-LAST:event_btn_lastActionPerformed
 
+    // Vi tri phia truoc
     private void btn_prevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_prevActionPerformed
         pos--;
         if(pos < 0) pos = 0;
         ShowScore(pos);
     }//GEN-LAST:event_btn_prevActionPerformed
 
+    // Dieu huong Bang bang phim mui ten
     private void tbl_scoreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_scoreKeyReleased
         if(evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN){
-            int rowIndex = tbl_student.getSelectedRow();
+            int rowIndex = tbl_score.getSelectedRow();
             ShowScore(rowIndex);
         }
     }//GEN-LAST:event_tbl_scoreKeyReleased
 
+    // Xoa diem
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         if(!txt_id.getText().equals("")){
             Connection con = MyConnection.getConnection();
@@ -428,6 +434,7 @@ public class ManageScoreForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_deleteActionPerformed
 
+    // Chinh sua diem
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         String updateQuery = null;
         PreparedStatement ps;
@@ -453,6 +460,7 @@ public class ManageScoreForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_updateActionPerformed
 
+    // Vi tri phia sau
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         pos++;
         if(pos > getScoreList().size() -1)  pos = getScoreList().size() -1;

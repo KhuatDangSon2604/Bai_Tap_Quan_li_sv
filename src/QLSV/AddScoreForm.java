@@ -7,7 +7,11 @@ package QLSV;
 
 
 import static QLSV.ManageStudentForm.tbl_student;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -151,6 +155,11 @@ public class AddScoreForm extends javax.swing.JFrame {
         txt_description.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txt_score.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_score.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_scoreKeyTyped(evt);
+            }
+        });
 
         cbb_course_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbb_course_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -285,10 +294,12 @@ public class AddScoreForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Dong Form
     private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_btn_cancelActionPerformed
 
+    // Them diem
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
        if(checkInputs()){
             try {
@@ -309,6 +320,7 @@ public class AddScoreForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_addActionPerformed
 
+    // Hien thi du lieu diem tu bang len JTextField, JCombobox ...
     private void tbl_scoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_scoreMouseClicked
         int rowIndex = tbl_score.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tbl_score.getModel();
@@ -318,6 +330,14 @@ public class AddScoreForm extends javax.swing.JFrame {
         txt_score.setText(model.getValueAt(rowIndex, 3).toString());
         txt_description.setText(model.getValueAt(rowIndex, 4).toString());
     }//GEN-LAST:event_tbl_scoreMouseClicked
+
+    // Chi cho nhap so trong Phan nhap diem
+    private void txt_scoreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_scoreKeyTyped
+        // Allow only number
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_scoreKeyTyped
 
     /**
      * @param args the command line arguments

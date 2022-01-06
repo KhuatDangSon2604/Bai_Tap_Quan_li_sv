@@ -5,12 +5,16 @@
  */
 package QLSV;
 
-import static QLSV.ManageMajorForm.tbl_major;
+
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -350,11 +354,13 @@ public class ManageMajorForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_nameActionPerformed
 
+    // Hine thi du lieu cua bang len Jtextfield, JCombobox
     private void tbl_majorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_majorMouseClicked
         int index = tbl_major.getSelectedRow();
         ShowMajor(index);
     }//GEN-LAST:event_tbl_majorMouseClicked
 
+    // Dieu huong bang bang phim mui ten
     private void tbl_majorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_majorKeyReleased
         if(evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN){
             int index = tbl_major.getSelectedRow();
@@ -362,6 +368,7 @@ public class ManageMajorForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbl_majorKeyReleased
 
+    // Xoa Major
     private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
         if(!txt_id.getText().equals("")){
             Connection con = MyConnection.getConnection();
@@ -384,6 +391,7 @@ public class ManageMajorForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_removeActionPerformed
 
+    // Mo Form Them Major
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         AddMajorForm amf = new AddMajorForm();
         amf.setVisible(true);
@@ -393,6 +401,7 @@ public class ManageMajorForm extends javax.swing.JFrame {
         Show_Majors_In_JTable();
     }//GEN-LAST:event_btn_addActionPerformed
 
+    // Chinh sua Major
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         if(checkInputs()){
             String UpdateQuery = null;
@@ -419,11 +428,13 @@ public class ManageMajorForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_editActionPerformed
 
+    // Vi tri dau tien
     private void btn_firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_firstActionPerformed
         pos = 0;
         ShowMajor(pos);
     }//GEN-LAST:event_btn_firstActionPerformed
 
+    // Vi tri truoc do
     private void btn_prevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_prevActionPerformed
         pos--;
         if(pos < 0){
@@ -432,6 +443,7 @@ public class ManageMajorForm extends javax.swing.JFrame {
         ShowMajor(pos);
     }//GEN-LAST:event_btn_prevActionPerformed
 
+    // Vi tri phia sau
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         pos++;
         if(pos >= getMajorList().size()){
@@ -440,6 +452,7 @@ public class ManageMajorForm extends javax.swing.JFrame {
         ShowMajor(pos);
     }//GEN-LAST:event_btn_nextActionPerformed
 
+    // Vi tri cuoi cung
     private void btn_lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lastActionPerformed
         pos = getMajorList().size() - 1;
         ShowMajor(pos);

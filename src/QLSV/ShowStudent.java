@@ -222,6 +222,7 @@ public class ShowStudent extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_tbl_studentKeyReleased
 
+    // Tim kiem trong bang
     private void txt_vallfindKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_vallfindKeyReleased
         DefaultTableModel model = (DefaultTableModel)tbl_student.getModel();
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);

@@ -20,9 +20,10 @@ public class MainFormForStudent extends javax.swing.JFrame {
      */
     public MainFormForStudent() {
         initComponents();
-        currentDate();
+        currentDate(); // Goi ngay thang vao Constructor
     }
     
+    // Tao ngay thang
     public void currentDate(){
         Calendar cal = new GregorianCalendar();
         int month = cal.get(Calendar.MONTH);
@@ -349,16 +350,19 @@ public class MainFormForStudent extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Logout
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         this.dispose();
         LoginForm lf = new LoginForm();
         lf.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    // Dong chuong trinh
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    // Show Student Form
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         ShowStudent ss = new ShowStudent();
         ss.setVisible(true);
@@ -371,6 +375,7 @@ public class MainFormForStudent extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenu2ActionPerformed
 
+    // Show Teacher Form
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         ShowTeacher st = new ShowTeacher();
         st.setVisible(true);
@@ -379,6 +384,7 @@ public class MainFormForStudent extends javax.swing.JFrame {
         st.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
+    // Show Course Form
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
         ShowCourse sc = new ShowCourse();
         sc.setVisible(true);
@@ -387,6 +393,7 @@ public class MainFormForStudent extends javax.swing.JFrame {
         sc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
+    // Show Major Form
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         ShowMajor sm = new ShowMajor();
         sm.setVisible(true);
@@ -395,6 +402,7 @@ public class MainFormForStudent extends javax.swing.JFrame {
         sm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
+    // Show Score Form
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         ShowScoreForm ssf = new ShowScoreForm();
         ssf.setVisible(true);

@@ -392,10 +392,12 @@ public class AddStudentForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_emailActionPerformed
 
+    // Dong form
     private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_btn_cancelActionPerformed
 
+    // Chi cho nhap so o txt_phone_number
     private void txt_phone_numberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_phone_numberKeyTyped
         // Allow only number
         if(!Character.isDigit(evt.getKeyChar())){
@@ -403,6 +405,7 @@ public class AddStudentForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_phone_numberKeyTyped
 
+    // Them sinh vien
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         if(checkInputs() && ImgPath != null){           
             try
@@ -441,6 +444,7 @@ public class AddStudentForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_addActionPerformed
 
+    // Chon anh
     private void btn_Choose_imageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Choose_imageActionPerformed
         JFileChooser file = new JFileChooser();
         file.setCurrentDirectory(new File(System.getProperty("user.home")));

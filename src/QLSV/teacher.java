@@ -63,7 +63,7 @@ public class teacher {
         return picture;
     }
     
-    private int getStudentId(String teachername){
+    private int getTeacherId(String teachername){
         int teacherId = 0;
         
         Connection con = MyConnection.getConnection();

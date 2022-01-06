@@ -46,7 +46,7 @@ public class ManageStudentForm extends javax.swing.JFrame {
     public ManageStudentForm() {
         initComponents();
         setLocationRelativeTo(null);
-        major.fillMajorCombo(cbb_major);
+        major.fillMajorCombo(cbb_major); // Dien ten cua Major vao phan major cua Sinh vien
         Show_Students_In_JTable();
         tbl_student.setRowHeight(40);
         tbl_student.setShowGrid(true);
@@ -556,6 +556,7 @@ public class ManageStudentForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Chon Anh
     private void btn_Choose_imageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Choose_imageActionPerformed
         JFileChooser file = new JFileChooser();
         file.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -575,6 +576,7 @@ public class ManageStudentForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_Choose_imageActionPerformed
 
+    // phan nhap so dien thoai chi cho nhap so
     private void txt_phone_numberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_phone_numberKeyTyped
         // Allow only number
         if(!Character.isDigit(evt.getKeyChar())){
@@ -586,6 +588,7 @@ public class ManageStudentForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_emailActionPerformed
 
+    // Chinh sua sinh vien
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         if(checkInputs() && txt_id.getText() != null){
             String UpdateQuery = null;
@@ -676,6 +679,7 @@ public class ManageStudentForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_editActionPerformed
 
+    // Xoa sinh vien
     private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
         if(!txt_id.getText().equals("")){
             Connection con = MyConnection.getConnection();
@@ -698,6 +702,7 @@ public class ManageStudentForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_removeActionPerformed
 
+    // Mo form them sinh vien
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         AddStudentForm asf = new AddStudentForm();
         asf.setVisible(true);
@@ -707,46 +712,26 @@ public class ManageStudentForm extends javax.swing.JFrame {
         Show_Students_In_JTable();
     }//GEN-LAST:event_btn_addActionPerformed
 
+    // Hien thi du lieu cua bang len JTextField, JCombobox
     private void tbl_studentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_studentMouseClicked
-        
+       
         int rowIndex = tbl_student.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel)tbl_student.getModel();
-        txt_id.setText(model.getValueAt(rowIndex, 0).toString());
-        txt_name.setText(model.getValueAt(rowIndex, 1).toString());
-        if(model.getValueAt(rowIndex, 2).toString().equals("male")){
-            rbd_male.setSelected(true);
-            rbd_female.setSelected(false);
-        }else{
-            rbd_female.setSelected(true);
-            rbd_male.setSelected(false);
-        }
-        try
-        {
-            
-            Date addDate = null;
-            addDate = new SimpleDateFormat("yyyy-MM-dd").parse((String)getStudentList().get(rowIndex).getBdate());
-            DateChooser_Birthdate.setDate(addDate);
-        } catch (ParseException ex)
-        {
-            Logger.getLogger(ManageStudentForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        cbb_major.setSelectedItem(model.getValueAt(rowIndex, 4).toString());
-        txt_address.setText(model.getValueAt(rowIndex, 5).toString());
-        txt_phone_number.setText(model.getValueAt(rowIndex, 6).toString());
-        txt_email.setText(model.getValueAt(rowIndex, 7).toString());
-        lbl_image.setIcon(ResizeImage(null, getStudentList().get(rowIndex).getPicture()));
+        ShowStudent(rowIndex);
     }//GEN-LAST:event_tbl_studentMouseClicked
 
+    // Vi tri ban dau
     private void btn_firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_firstActionPerformed
         pos = 0;
         ShowStudent(pos);
     }//GEN-LAST:event_btn_firstActionPerformed
 
+    // Vi tri cuoi cung
     private void btn_lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lastActionPerformed
         pos = getStudentList().size() -1;
         ShowStudent(pos);
     }//GEN-LAST:event_btn_lastActionPerformed
 
+    // Vi tri phia truoc
     private void btn_prevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_prevActionPerformed
         pos--;
         
@@ -756,6 +741,7 @@ public class ManageStudentForm extends javax.swing.JFrame {
         ShowStudent(pos);
     }//GEN-LAST:event_btn_prevActionPerformed
 
+    // Vi tri tiep sau
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         pos++;
         

@@ -187,6 +187,7 @@ public class ShowMajor extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_tbl_majorKeyReleased
 
+    // Tim kiem trong bang
     private void txt_valfindKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valfindKeyReleased
         DefaultTableModel model = (DefaultTableModel)tbl_major.getModel();
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);

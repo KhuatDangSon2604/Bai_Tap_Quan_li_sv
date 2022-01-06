@@ -5,9 +5,10 @@
  */
 package QLSV;
 
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 
 public class MyFunction {
     public static int countData(String tableName){

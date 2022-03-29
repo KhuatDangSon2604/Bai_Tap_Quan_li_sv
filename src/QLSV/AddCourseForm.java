@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author DELL
  */
+
 public class AddCourseForm extends javax.swing.JFrame {
 
     /**
